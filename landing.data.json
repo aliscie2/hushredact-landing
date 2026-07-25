@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "title": "HushRedact — Redact Documents, Then Use AI",
+    "description": "Redact confidential documents on your device, then use the latest AI models on the safe copy. Built for legal and financial professionals. Download for Mac.",
+    "ogTitle": "HushRedact — Use AI with privacy and peace of mind",
+    "ogDescription": "Redact confidential documents on-device, then use the latest AI models on the safe copy. Client data never leaves your machine. Built for legal and financial professionals."
+  },
+  "brand": {
+    "name": "HushRedact",
+    "logoAlt": "HushRedact",
+    "logoMark": "assets/logo-mark.png"
+  },
+  "downloads": {
+    "macDownload": "https://pub-7686f1d19a3b4be3b091902492747827.r2.dev/HushRedact.dmg",
+    "macRequirement": "macOS 11+ · Apple Silicon"
+  },
+  "nav": {
+    "links": [],
+    "cta": "Download for Mac"
+  },
+  "hero": {
+    "eyebrow": "Built for legal and financial professionals",
+    "headline": "Use AI with privacy and peace of mind",
+    "subhead": "Redact confidential documents and then use them with the latest, most advanced AI models, all in a single application. Built for legal and financial professionals.",
+    "primaryCta": "Start Using HushRedact",
+    "primaryCtaNote": "macOS 11+ · Apple Silicon",
+    "image": {
+      "src": "assets/hero-product.png",
+      "alt": "HushRedact showing a document with names, organizations and IDs marked for redaction, a review panel, and a Safe AI chat"
+    }
+  },
+  "howItWorks": {
+    "id": "how-it-works",
+    "eyebrow": "How It Works",
+    "heading": "Two functions, one seamless app",
+    "body": "PII detection and redaction run entirely on your machine with a local model, fully offline. The original never touches a server. Only the redacted safe copy goes online.",
+    "cards": [
+      {
+        "title": "Detected on your device",
+        "icon": "detect",
+        "body": "A local model reads the document right on your machine and finds names, organizations, money and IDs.",
+        "image": { "src": "assets/cap-detect.png", "alt": "Names, organizations and IDs detected on-device" }
+      },
+      {
+        "title": "Nothing leaves your machine",
+        "icon": "private",
+        "body": "Your original document and its sensitive text are never uploaded. No server, not even ours, ever sees the original.",
+        "image": { "src": "assets/cap-private.png", "alt": "The original document staying on your machine" }
+      },
+      {
+        "title": "Works fully offline",
+        "icon": "offline",
+        "body": "Detection and redaction run with no internet connection. Only the redacted safe copy is ever sent online, and only to the AI chat.",
+        "image": { "src": "assets/cap-offline.png", "alt": "Redaction running with no internet connection" }
+      }
+    ]
+  },
+  "compare": {
+    "id": "compare",
+    "eyebrow": "The Comparison",
+    "heading": "Your options without HushRedact",
+    "columnA": "With HushRedact",
+    "columnB": "Without HushRedact",
+    "rows": [
+      {
+        "label": "Your sensitive data",
+        "hushredact": [
+          "Redacted on-device before any upload",
+          "The original never leaves your machine",
+          "Use any AI model on the safe copy"
+        ],
+        "alternative": [
+          "Paste raw data into a chatbot",
+          "Confidential text sits on a server",
+          "Or skip AI and lose the speed"
+        ]
+      },
+      {
+        "label": "The process",
+        "hushredact": [
+          "Automatic PII detection with a local model",
+          "Runs fully offline",
+          "Finds names, numbers, PII and PHI",
+          "One app for redaction and AI"
+        ],
+        "alternative": [
+          "Manual redaction, line by line",
+          "Online tools upload your file first",
+          "Three separate apps taped together",
+          "Easy to miss something by hand"
+        ]
+      },
+      {
+        "label": "Time to done",
+        "hushredact": [
+          "Minutes per document",
+          "No re-typing the secrets back in",
+          "Repeatable across a whole data room"
+        ],
+        "alternative": [
+          "Hours of manual busywork",
+          "Refill confidential details by hand",
+          "Error-prone the moment it scales"
+        ]
+      }
+    ]
+  },
+  "useCases": {
+    "id": "features",
+    "eyebrow": "Features",
+    "heading": "Built for legal and financial professionals",
+    "body": "Use HushRedact for any of these tasks so you can complete entire projects in one smooth, efficient process, all in one place.",
+    "cta": "See How It Works",
+    "ctaHref": "#how-it-works",
+    "illustration": { "src": "assets/features-illustration.png", "alt": "Examples of documents and projects HushRedact works with" },
+    "cards": [
+      {
+        "heading": "Revise finalized documents",
+        "icon": "files",
+        "body": "Redact a previously finalized document, such as a signed operating agreement or trust, then tell AI to revise it, refill the confidential information automatically and offline, and send the new draft to your team or client."
+      },
+      {
+        "heading": "Create memos or summaries",
+        "icon": "share",
+        "body": "Redact a final document, send the redacted copy along with your memo template to an AI chat, and tell the AI to complete the memo."
+      },
+      {
+        "heading": "Evaluate KYC packages and data rooms",
+        "icon": "database",
+        "body": "Redact an entire set of documents (a KYC package, a data room, or any large collection) and let AI figure out what you need to ask for next."
+      },
+      {
+        "heading": "Anything else you want AI to do",
+        "icon": "brain",
+        "body": "If AI can do it, you can do it here, privately. Whatever the task, the sensitive parts stay on your device."
+      }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "eyebrow": "FAQ",
+    "heading": "Questions, answered.",
+    "body": "How HushRedact handles your documents, your data, and your AI.",
+    "cta": "Contact Us",
+    "ctaHref": "#[CONFIRM-contact-link]",
+    "items": [
+      {
+        "question": "Does my document ever leave my computer?",
+        "answer": "No. Detection and redaction run on your machine, offline. Your original and its sensitive text are never uploaded — no server, not even ours, sees them."
+      },
+      {
+        "question": "What gets redacted?",
+        "answer": "Names, numbers, addresses, and other personal identifiers - PII and PHI. HushRedact detects them automatically with a local model, including in complex financial documents that trip up generic tools. You can review and adjust before anything leaves your device."
+      },
+      {
+        "question": "Which AI sees my file?",
+        "answer": "Only the redacted version, and only the AI you choose to send it to. Your sensitive data is stripped out on-device first, so the model works on a safe copy - never the original."
+      },
+      {
+        "question": "Does it work offline?",
+        "answer": "The redaction does, fully. Detecting and removing sensitive data happens on your machine with no connection required. You only go online for the AI chat step - and by then, your file is already safe."
+      },
+      {
+        "question": "Which documents and data types does it handle?",
+        "answer": "Contracts, medical records, financial statements, legal filings - any document with sensitive text. It handles complex financial files that generic redaction tools can't, and detects names, numbers, PII, and PHI across them automatically."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "For the work that demands confidentiality.",
+    "body": "Confidently safeguard client information and use the full power of AI, eliminating the hassle and turning hours-long projects into minutes. The original never leaves your computer.",
+    "cta": "Download for Mac",
+    "note": "macOS 11+ · Apple Silicon",
+    "image": { "src": "assets/cta-logos.png", "alt": "Logos of the AI tools and apps HushRedact works alongside" }
+  },
+  "footer": {
+    "blurb": "HushRedact strips sensitive data from your documents on-device, so you can use any AI without ever exposing private information.",
+    "cta": "Download for Mac",
+    "columns": [
+      {
+        "title": "Quick Links",
+        "links": [
+          { "label": "How It Works", "href": "#how-it-works" },
+          { "label": "Comparison", "href": "#compare" },
+          { "label": "Features", "href": "#features" }
+        ]
+      },
+      {
+        "title": "Privacy",
+        "links": [
+          { "label": "Terms of Service", "href": "#" },
+          { "label": "Privacy Policy", "href": "#" },
+          { "label": "Security Policy", "href": "#" }
+        ]
+      }
+    ],
+    "legalLinks": [],
+    "copyright": "© 2026 HushRedact. All rights reserved."
+  }
+}
