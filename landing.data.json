@@ -190,7 +190,8 @@
         "links": [
           { "label": "Terms of Service", "href": "#" },
           { "label": "Privacy Policy", "href": "#" },
-          { "label": "Security Policy", "href": "#" }
+          { "label": "Security Policy", "href": "#" },
+          { "label": "Enroll now", "href": "https://hushredact.com/enroll", "emphasis": true }
         ]
       }
     ],

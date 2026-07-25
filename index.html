@@ -259,6 +259,9 @@
     .foot-col h4{font-size:14px;margin:0 0 14px}
     .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
     .foot-col a{color:var(--muted);text-decoration:none;font-size:14px;display:inline-flex;min-height:24px;align-items:center}
+    .foot-col a.em{color:var(--ink);font-weight:600;gap:5px}
+    .foot-col a.em .ic{width:14px;height:14px;transition:transform .2s var(--ease)}
+    @media(hover:hover){.foot-col a.em:hover .ic{transform:translateX(3px)}}
     @media(hover:hover){.foot-col a:hover{color:var(--ink)}}
     .foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
     /* reveal animations */
@@ -523,7 +526,7 @@
       </div></div></section>`;
     }
     function footer(d){ const f=d.footer; if(!f)return '';
-      const cols=(f.columns||[]).map(col=>`<div class="foot-col"><h4>${esc(col.title)}</h4><ul>${(col.links||[]).map(l=>`<li><a href="${esc(l.href)}">${esc(l.label)}</a></li>`).join('')}</ul></div>`).join('');
+      const cols=(f.columns||[]).map(col=>`<div class="foot-col"><h4>${esc(col.title)}</h4><ul>${(col.links||[]).map(l=>`<li><a href="${esc(l.href)}"${l.emphasis?' class="em"':''}>${esc(l.label)}${l.emphasis?IC_ARROW:''}</a></li>`).join('')}</ul></div>`).join('');
       return `<footer class="site"><div class="container">
         <div class="foot-grid">
           <div class="foot-brand"><a class="brand" href="#top">${d.brand?.logoMark?`<img class="mark-img" src="${esc(d.brand.logoMark)}" alt="" aria-hidden="true"/>`:`<span class="mark" aria-hidden="true">H</span>`}<span>${esc(d.brand?.name)}</span></a>
