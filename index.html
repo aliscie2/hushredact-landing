@@ -81,14 +81,15 @@
     .hd-sub{text-align:center;font-size:11.5px;margin-top:14px;letter-spacing:.02em}
     /* pill snaps OVER the real value (same cell) so the sentence never shows a hole */
     .hpw{display:inline-grid;align-items:center;justify-items:center;vertical-align:middle}
-    .hpr{grid-area:1/1;white-space:nowrap;animation:hprOut 7.5s var(--ease-organic) infinite;animation-delay:calc(var(--d) * .3s)}
+    .hpr{grid-area:1/1;white-space:nowrap;padding:0 3px;border-radius:4px;animation:hprOut 7.5s var(--ease-organic) infinite;animation-delay:calc(var(--d) * .3s)}
     .hp{grid-area:1/1;font-family:var(--font);font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:2.5px 8px;border-radius:6px;display:inline-block;opacity:0;animation:hpIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .3s)}
     .hp-org{background:#d7ecea;color:#0f6a63}
     .hp-money{background:#fbeab8;color:#8a5a08}
     .hp-id{background:#e7defa;color:#6d33c9}
     .hp-addr{background:#e6f1d4;color:#54780f}
-    @keyframes hpIn{0%,4%{opacity:0;transform:scale(.7)}8%{opacity:1;transform:scale(1.1)}11%,94%{opacity:1;transform:scale(1)}99%,100%{opacity:0;transform:scale(.7)}}
-    @keyframes hprOut{0%,5%{opacity:1}9%,93%{opacity:0}97%,100%{opacity:1}}
+    @keyframes hpIn{0%,8%{opacity:0;transform:scale(.7)}12%{opacity:1;transform:scale(1.1)}15%,94%{opacity:1;transform:scale(1)}99%,100%{opacity:0;transform:scale(.7)}}
+    /* value hides only while the pill is fully opaque — a gap can never exist */
+    @keyframes hprOut{0%,4%{opacity:1;background:transparent;color:inherit}6%,10%{opacity:1;background:#fde68a;color:#7c2d12}16%,90%{opacity:0}96%,100%{opacity:1;background:transparent;color:inherit}}
     .hd-chip{position:absolute;right:16px;bottom:14px;display:inline-flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:6px 12px;font-family:var(--font);font-size:11px;font-weight:600;color:var(--ink);box-shadow:0 6px 16px -10px rgba(2,6,23,.35);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:2.3s}
     .hd-rail{background:#fbfbfa;border-left:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px}
     .hd-railhead{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;font-family:var(--font-head)}
@@ -121,51 +122,72 @@
     /* how-it-works: 3 distinct step animations */
     .sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
     .sc .lbl{font-size:9px;font-weight:600;background:#fff;border:1px solid var(--line2);border-radius:6px;padding:4px 9px;color:var(--muted)}
-    /* 1 · detect — tiny sticky note whose PII items cycle highlight → blackout
-       (ported from the live site's PaperAnimation letter loop) */
-    .sc-detect .note{position:relative;width:172px;background:#fffdf2;border:1px solid #eadfa8;border-radius:8px;padding:13px 14px 15px;box-shadow:0 14px 28px -16px rgba(2,6,23,.4);transform:rotate(-2.5deg);animation:noteBob 8s var(--ease-organic) infinite}
-    @keyframes noteBob{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(-1.3deg) translateY(-3px)}}
-    .sc-detect .note::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 16px 16px 0;border-color:var(--surface) var(--surface) #eadfa8 transparent;border-bottom-left-radius:6px}
-    .sc-detect .note-h{font-size:7.5px;font-weight:700;letter-spacing:.09em;color:#8a6d3b;margin-bottom:6px}
-    .sc-detect .note p{font-size:9.3px;line-height:1.95;color:#475569;margin:0}
-    .ntok{border-radius:3px;padding:0 3px;white-space:nowrap;animation:noteRedact 8s var(--ease-organic) infinite;animation-delay:calc(var(--d) * 1.1s)}
-    @keyframes noteRedact{0%,6%{background:transparent;color:inherit}9%,14%{background:#fde68a;color:#7c2d12}18%,86%{background:var(--ink);color:var(--ink)}93%,100%{background:transparent;color:inherit}}
-    /* shared tiny paper card used by the private/offline scenes */
-    .mdoc{position:relative;background:#fff;border:1px solid var(--line2);border-radius:7px;box-shadow:0 12px 24px -15px rgba(2,6,23,.5)}
-    .mdoc i{display:block;height:4px;border-radius:2px;background:var(--line2);margin-top:5px}
-    .mdoc i:first-child{margin-top:0;width:55%;background:#cbd5e1}
-    .mdoc i:nth-child(2){width:92%}
-    .mdoc i:nth-child(3){width:74%}
-    .mdoc i:nth-child(4){width:84%}
-    /* 2 · private — your document tries to reach the server, gets blocked, stays on device */
+    /* ONE story across the three cards — detect → blocked → offline. The SAME
+       CLIENT FILE note appears in every card; a single 12s timeline
+       (.caps.story-run, added once on scroll-into-view) plays left→right and
+       holds the finished chain. Phase windows: detect 8-25% · handoff 25-33% ·
+       upload-try 33-50% · blocked 50-58% · handoff 58-66% · offline redact 66-83% · hold. */
+    .caps{position:relative}
+    .note{position:relative;width:172px;background:#fffdf2;border:1px solid #eadfa8;border-radius:8px;padding:13px 14px 15px;box-shadow:0 14px 28px -16px rgba(2,6,23,.4);transform:rotate(-2deg)}
+    .note::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 16px 16px 0;border-color:var(--surface) var(--surface) #eadfa8 transparent;border-bottom-left-radius:6px}
+    .note-h{font-size:7.5px;font-weight:700;letter-spacing:.09em;color:#8a6d3b;margin-bottom:6px}
+    .note p{font-size:9.3px;line-height:1.95;color:#475569;margin:0}
+    .stok{border-radius:3px;padding:0 3px;white-space:nowrap}
+    .story-run .sc-detect .stok{animation:stokDetect 12s var(--ease-organic) 1 both;animation-delay:calc(var(--i) * .4s)}
+    @keyframes stokDetect{0%,8%{background:transparent;color:inherit}11%,100%{background:#fde68a;color:#7c2d12}}
+    .story-run .sc-detect .note{animation:capLift1 12s var(--ease-organic) 1 both}
+    @keyframes capLift1{0%,2%{transform:rotate(-2deg)}5%,28%{transform:rotate(-1deg) translateY(-4px)}33%,100%{transform:rotate(-2deg)}}
+    /* 2 · private — the same note tries to reach the server, gets blocked */
     .sc-private{gap:0;justify-content:space-between;padding:14px}
-    .sc-private .srv{display:inline-flex;align-items:center;gap:5px;animation:srvDeny 5.2s var(--ease-organic) infinite}
+    .sc-private .srv{display:inline-flex;align-items:center;gap:5px}
     .sc-private .srv svg{width:13px;height:13px}
-    @keyframes srvDeny{0%,42%{border-color:var(--line2);color:var(--muted)}47%,60%{border-color:var(--no);color:var(--no)}68%,100%{border-color:var(--line2);color:var(--muted)}}
+    .story-run .sc-private .srv{animation:srvDeny 12s var(--ease-organic) 1 both}
+    @keyframes srvDeny{0%,49%{border-color:var(--line2);color:var(--muted)}51%,57%{border-color:var(--no);color:var(--no)}62%,100%{border-color:var(--line2);color:var(--muted)}}
     .sc-private .chan{position:relative;flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
-    .sc-private .fence{position:absolute;top:12px;left:16%;right:16%;border-top:2px dashed var(--line2)}
-    .sc-private .fence i{position:absolute;top:-10px;left:50%;transform:translateX(-50%);display:grid;place-items:center;width:18px;height:18px;border-radius:5px;border:1.6px solid var(--ink);color:var(--ink);background:#fff;animation:fenceFlash 5.2s var(--ease-organic) infinite}
+    .sc-private .fence{position:absolute;top:10px;left:12%;right:12%;border-top:2px dashed var(--line2)}
+    .sc-private .fence i{position:absolute;top:-10px;left:50%;transform:translateX(-50%);display:grid;place-items:center;width:18px;height:18px;border-radius:5px;border:1.6px solid var(--ink);color:var(--ink);background:#fff}
     .sc-private .fence svg{width:9px;height:9px}
-    @keyframes fenceFlash{0%,42%{border-color:var(--ink);color:var(--ink);box-shadow:none}47%,60%{border-color:var(--no);color:var(--no);box-shadow:0 0 0 4px rgba(185,28,28,.15)}68%,100%{border-color:var(--ink);color:var(--ink);box-shadow:none}}
-    .sc-private .mdoc{width:104px;padding:9px 10px;margin-bottom:2px;animation:docTry 5.2s var(--ease-organic) infinite}
-    @keyframes docTry{0%,16%{transform:translateY(0) rotate(0)}40%{transform:translateY(-34px) rotate(-1.5deg)}46%{transform:translateY(-28px) rotate(1deg)}53%{transform:translateY(-31px) rotate(-.5deg)}74%,100%{transform:translateY(0) rotate(0)}}
-    /* 3 · offline — no connection, the document still redacts itself */
+    .story-run .sc-private .fence i{animation:fenceFlash 12s var(--ease-organic) 1 both}
+    @keyframes fenceFlash{0%,49%{border-color:var(--ink);color:var(--ink);box-shadow:none}51%,57%{border-color:var(--no);color:var(--no);box-shadow:0 0 0 4px rgba(185,28,28,.15)}62%,100%{border-color:var(--ink);color:var(--ink);box-shadow:none}}
+    .sc-private .note{width:150px;margin-bottom:2px}
+    .story-run .sc-private .note{animation:docTry 12s var(--ease-organic) 1 both}
+    @keyframes docTry{0%,33%{transform:rotate(-2deg) translateY(0)}42%{transform:rotate(0) translateY(-30px)}47%{transform:rotate(-1deg) translateY(-24px)}52%{transform:rotate(0) translateY(-27px)}60%,100%{transform:rotate(-2deg) translateY(0)}}
+    .story-run .sc-private .stok{animation:stokCarry 12s linear 1 both}
+    @keyframes stokCarry{0%,34%{background:transparent;color:inherit}37%,100%{background:#fde68a;color:#7c2d12}}
+    /* 3 · offline — connection dies, the same note redacts itself */
     .sc-offline{gap:11px}
     .sc-offline .wifi{position:relative;display:flex;align-items:flex-end;gap:3px;height:22px}
-    .sc-offline .wifi i{width:5px;border-radius:2px;background:var(--accent);animation:wifiOff 8s var(--ease-organic) infinite}
-    .sc-offline .wifi i:nth-child(1){height:7px;animation-delay:.14s}
-    .sc-offline .wifi i:nth-child(2){height:13px;animation-delay:.07s}
+    .sc-offline .wifi i{width:5px;border-radius:2px;background:var(--accent)}
+    .sc-offline .wifi i:nth-child(1){height:7px}
+    .sc-offline .wifi i:nth-child(2){height:13px}
     .sc-offline .wifi i:nth-child(3){height:19px}
-    @keyframes wifiOff{0%,3%{background:var(--accent)}8%,90%{background:var(--line2)}96%,100%{background:var(--accent)}}
-    .sc-offline .wifi .slash{position:absolute;left:50%;top:-3px;width:2px;height:28px;background:var(--no);transform:translateX(-50%) rotate(45deg) scaleY(0);transform-origin:center;animation:slashIn 8s var(--ease-organic) infinite}
-    @keyframes slashIn{0%,3%{transform:translateX(-50%) rotate(45deg) scaleY(0)}8%,90%{transform:translateX(-50%) rotate(45deg) scaleY(1)}96%,100%{transform:translateX(-50%) rotate(45deg) scaleY(0)}}
-    .sc-offline .mdoc{width:150px;padding:10px 12px}
-    .sc-offline .mdoc p{font-size:8.8px;line-height:1.95;color:#475569;margin:0}
+    .story-run .sc-offline .wifi i{animation:wifiOff 12s var(--ease-organic) 1 both}
+    @keyframes wifiOff{0%,64%{background:var(--accent)}68%,100%{background:var(--line2)}}
+    .sc-offline .wifi .slash{position:absolute;left:50%;top:-3px;width:2px;height:28px;background:var(--no);transform:translateX(-50%) rotate(45deg) scaleY(0);transform-origin:center}
+    .story-run .sc-offline .wifi .slash{animation:slashIn 12s var(--ease-organic) 1 both}
+    @keyframes slashIn{0%,64%{transform:translateX(-50%) rotate(45deg) scaleY(0)}69%,100%{transform:translateX(-50%) rotate(45deg) scaleY(1)}}
+    .sc-offline .note{width:160px}
+    .story-run .sc-offline .stok{animation:stokRedact 12s var(--ease-organic) 1 both;animation-delay:calc(var(--i) * .35s)}
+    @keyframes stokRedact{0%,66%{background:transparent;color:inherit}69%,71%{background:#fde68a;color:#7c2d12}74%,100%{background:var(--ink);color:var(--ink)}}
+    /* connectors between the cards (desktop): light once per handoff, stay lit */
+    .conn{display:none}
+    @media(min-width:1024px){
+      .conn{display:block;position:absolute;top:118px;width:44px;border-top:2px dashed currentColor;color:var(--line2);z-index:2}
+      .conn::after{content:"";position:absolute;right:-4px;top:-5px;border:4px solid transparent;border-left:6px solid currentColor}
+      .conn1{left:calc((100% - 40px)/3 + 10px - 22px)}
+      .conn2{left:calc(2*(100% - 40px)/3 + 30px - 22px)}
+      .story-run .conn1{animation:connOn1 12s linear 1 both}
+      .story-run .conn2{animation:connOn2 12s linear 1 both}
+      @keyframes connOn1{0%,25%{color:var(--line2)}30%,100%{color:var(--ink)}}
+      @keyframes connOn2{0%,58%{color:var(--line2)}63%,100%{color:var(--ink)}}
+    }
     @media(prefers-reduced-motion:reduce){
-      .sc *{animation:none!important}
-      .ntok{background:var(--ink);color:var(--ink)}
+      .sc *,.conn{animation:none!important}
+      .sc-detect .stok,.sc-private .stok{background:#fde68a;color:#7c2d12}
+      .sc-offline .stok{background:var(--ink);color:var(--ink)}
       .sc-offline .wifi i{background:var(--line2)}
       .sc-offline .wifi .slash{transform:translateX(-50%) rotate(45deg) scaleY(1)}
+      .conn{color:var(--ink)}
     }
     .cap-body{padding:22px}
     .cap-title{display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -423,31 +445,26 @@
         <div class="fw-foot"><span>OFFLINE · REDACTION</span><span class="fw-count">7 redacted on this device</span></div>
       </div></div>`;
     }
-    function capScene(icon,logo){
-      if(icon==='detect') return `<div class="sc sc-detect" aria-hidden="true">
-        <div class="note">
+    function capScene(icon){
+      const NOTE=`<div class="note">
           <div class="note-h">CLIENT FILE</div>
-          <p>Dear <span class="ntok" style="--d:0">Mr. John Smith</span>,</p>
-          <p>SSN <span class="ntok" style="--d:1">482-39-1850</span></p>
-          <p>Wire from <span class="ntok" style="--d:2">Acme Capital</span></p>
-          <p>Call <span class="ntok" style="--d:3">(555) 867-5309</span></p>
-        </div>
-        <span class="lbl">Detected on your device</span></div>`;
+          <p>Dear <span class="stok" style="--i:0">Mr. John Smith</span>,</p>
+          <p>SSN <span class="stok" style="--i:1">482-39-1850</span></p>
+          <p>Wire from <span class="stok" style="--i:2">Acme Capital</span></p>
+          <p>Call <span class="stok" style="--i:3">(555) 867-5309</span></p>
+        </div>`;
+      if(icon==='detect') return `<div class="sc sc-detect" aria-hidden="true">${NOTE}<span class="lbl">Detected on your device</span></div>`;
       if(icon==='private') return `<div class="sc sc-private" aria-hidden="true">
         <span class="lbl srv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6.5 18a4.5 4.5 0 01-.4-9A6 6 0 0117.8 10 4 4 0 0117.5 18z"/></svg>Server</span>
         <div class="chan">
           <div class="fence"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></i></div>
-          <div class="mdoc"><i></i><i></i><i></i><i></i></div>
+          ${NOTE}
         </div>
         <span class="lbl">Your device</span></div>`;
       if(icon==='offline') return `<div class="sc sc-offline" aria-hidden="true">
         <div class="wifi"><i></i><i></i><i></i><span class="slash"></span></div>
         <span class="lbl">No internet</span>
-        <div class="mdoc">
-          <p>Client: <span class="ntok" style="--d:1">Dana Okonkwo</span></p>
-          <p>Account <span class="ntok" style="--d:2">4429-8817-02</span></p>
-          <p>Total <span class="ntok" style="--d:3">$4,200,000</span></p>
-        </div></div>`;
+        ${NOTE}</div>`;
       return '';
     }
     function header(d){
@@ -471,13 +488,13 @@
     }
     function howItWorks(d){ const s=d.howItWorks; if(!s)return '';
       const caps=(s.cards||[]).map((c,i)=>`<div class="cap reveal" style="--i:${i}">
-        <div class="cap-illo">${capScene(c.icon,d.brand&&d.brand.logoMark)}</div>
+        <div class="cap-illo">${capScene(c.icon)}</div>
         <div class="cap-body"><div class="cap-title">${c.icon?`<img class="cap-ic" src="assets/icon-${esc(c.icon)}.svg" alt="" aria-hidden="true"/>`:''}<h3>${esc(c.title)}</h3></div><p>${esc(c.body)}</p></div></div>`).join('');
       return `<section id="${esc(s.id)}"><div class="container">
         <div class="hiw-head reveal">
           <div class="section-head">${tag(s.eyebrow)}<h2>${esc(s.heading)}</h2></div>
           <p class="lead hiw-body">${esc(s.body)}</p>
-        </div><div class="caps">${caps}</div></div></section>`;
+        </div><div class="caps"><span class="conn conn1" aria-hidden="true"></span><span class="conn conn2" aria-hidden="true"></span>${caps}</div></div></section>`;
     }
     const CMP_ICONS=[
       _svg('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
@@ -548,6 +565,11 @@
       const els=document.querySelectorAll('.reveal');
       if(reduce||!('IntersectionObserver'in window)){els.forEach(e=>e.classList.add('in-view'));}
       else{const io=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.08});els.forEach(e=>io.observe(e));}
+      const caps=document.querySelector('.caps');
+      if(caps){
+        if(reduce||!('IntersectionObserver'in window)){caps.classList.add('story-run');}
+        else{const io2=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting){caps.classList.add('story-run');io2.disconnect()}})},{threshold:.3});io2.observe(caps);}
+      }
       requestAnimationFrame(()=>document.body.classList.add('loaded'));
     }
     function render(d){ setMeta(d.meta,d.brand);
