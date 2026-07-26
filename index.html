@@ -119,9 +119,13 @@
     @media(hover:hover){.cap:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(2,6,23,.35)}}
     .cap-illo{position:relative;background:var(--surface);border-bottom:1px solid var(--line);aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden}
     .cap-illo img{width:100%;height:100%;object-fit:cover}
+    .cap-badge{position:absolute;z-index:3;top:16px;left:16px;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(148,163,184,.28);border-radius:13px;background:rgba(255,255,255,.94);box-shadow:0 10px 24px -14px rgba(2,6,23,.42);backdrop-filter:blur(8px)}
+    .cap-badge img{width:28px;height:28px;object-fit:contain}
+    .cap-badge-detect{background:rgba(238,242,255,.96);border-color:rgba(99,102,241,.2)}
+    .cap-badge-offline{background:rgba(255,241,242,.96);border-color:rgba(190,18,60,.16)}
     /* how-it-works: 3 distinct step animations */
     .sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:18px}
-    .sc .lbl{font-size:9px;font-weight:600;background:#fff;border:1px solid var(--line2);border-radius:6px;padding:4px 9px;color:var(--muted)}
+    .sc .lbl{font-size:10.5px;font-weight:600;background:#fff;border:1px solid var(--line2);border-radius:7px;padding:5px 10px;color:var(--muted);box-shadow:0 6px 14px -12px rgba(2,6,23,.4)}
     /* ONE story across the three cards — detect → blocked → offline. The SAME
        CLIENT FILE note appears in every card; a single 12s timeline
        (.caps.story-run, added once on scroll-into-view) plays left→right and
@@ -140,7 +144,7 @@
     /* 2 · private — the same note tries to reach the server, gets blocked */
     .sc-private{gap:0;justify-content:space-between;padding:14px}
     .sc-private .srv{display:inline-flex;align-items:center;gap:5px}
-    .sc-private .srv svg{width:13px;height:13px}
+    .sc-private .srv svg{width:14px;height:14px}
     .story-run .sc-private .srv{animation:srvDeny 12s var(--ease-organic) 1 both}
     @keyframes srvDeny{0%,49%{border-color:var(--line2);color:var(--muted)}51%,57%{border-color:var(--no);color:var(--no)}62%,100%{border-color:var(--line2);color:var(--muted)}}
     .sc-private .chan{position:relative;flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
@@ -190,9 +194,8 @@
       .conn{color:var(--ink)}
     }
     .cap-body{padding:22px}
-    .cap-title{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .cap-title{margin-bottom:8px}
     .cap-title h3{margin:0}
-    .cap-ic{width:20px;height:20px;flex:none;color:var(--ink)}
     .cap-body p{color:var(--muted);font-size:16px;line-height:1.5;letter-spacing:-.02em}
     /* compare — floating-chip cards, ported from the live site's comparison section */
     .compare{margin-top:48px;display:flex;flex-direction:column;gap:30px;max-width:1000px;margin-left:auto;margin-right:auto}
@@ -307,6 +310,9 @@
     @media(min-width:768px){
       section{padding:80px 0}
       .caps{grid-template-columns:repeat(3,1fr)}
+      .cap-badge{top:10px;left:10px;width:40px;height:40px;border-radius:11px}
+      .cap-badge img{width:24px;height:24px}
+      .cap-illo .sc{transform:translateX(14px) scale(.82)}
       .hiw-head{flex-direction:row;gap:40px;align-items:flex-start}
       .hiw-head .section-head{flex:1}
       .hiw-head .hiw-body{flex:1;padding-top:8px}
@@ -323,6 +329,9 @@
     @media(min-width:1024px){
       section{padding:96px 0}
       .hero{padding-top:72px}
+      .cap-badge{top:16px;left:16px;width:48px;height:48px;border-radius:13px}
+      .cap-badge img{width:28px;height:28px}
+      .cap-illo .sc{transform:none}
       /* comparison: centered column headers over two-column cards */
       .compare-head{display:grid;grid-template-columns:1fr 1fr;gap:36px;padding:0 26px}
       .compare-head>div{display:flex;align-items:center;justify-content:center;gap:8px;font-weight:500;font-size:16px}
@@ -488,8 +497,8 @@
     }
     function howItWorks(d){ const s=d.howItWorks; if(!s)return '';
       const caps=(s.cards||[]).map((c,i)=>`<div class="cap reveal" style="--i:${i}">
-        <div class="cap-illo">${capScene(c.icon)}</div>
-        <div class="cap-body"><div class="cap-title">${c.icon?`<img class="cap-ic" src="assets/icon-${esc(c.icon)}.svg" alt="" aria-hidden="true"/>`:''}<h3>${esc(c.title)}</h3></div><p>${esc(c.body)}</p></div></div>`).join('');
+        <div class="cap-illo">${c.icon?`<span class="cap-badge cap-badge-${esc(c.icon)}" aria-hidden="true"><img src="assets/icon-${esc(c.icon)}.svg" alt=""/></span>`:''}${capScene(c.icon)}</div>
+        <div class="cap-body"><div class="cap-title"><h3>${esc(c.title)}</h3></div><p>${esc(c.body)}</p></div></div>`).join('');
       return `<section id="${esc(s.id)}"><div class="container">
         <div class="hiw-head reveal">
           <div class="section-head">${tag(s.eyebrow)}<h2>${esc(s.heading)}</h2></div>
