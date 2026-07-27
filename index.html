@@ -274,18 +274,27 @@
     .cw-online{display:flex;align-items:center;gap:4px;font-size:8px;font-weight:500;color:var(--muted);letter-spacing:.05em}
     .cw-online i{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:cwDot 2.4s ease-in-out infinite}
     @keyframes cwDot{0%,100%{opacity:1}50%{opacity:.3}}
-    .cw-log{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:9px}
+    .cw-log{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:9px}
+    .cw-file{display:flex;align-items:center;gap:7px;padding:7px 8px;margin-bottom:2px;border:1px solid var(--line);border-radius:8px;background:#fffdf2;box-shadow:0 5px 12px -11px rgba(2,6,23,.4)}
+    .cw-file-ic{position:relative;flex:none;width:22px;height:26px;border:1px solid #d9ca83;border-radius:4px;background:#fffdf2}
+    .cw-file-ic::after{content:"";position:absolute;top:-1px;right:-1px;width:8px;height:8px;background:linear-gradient(225deg,#fff 0 49%,#eadf9c 50% 100%);border-radius:0 3px 0 3px}
+    .cw-file-copy{min-width:0;display:flex;flex-direction:column;gap:1px}
+    .cw-file-copy b{font-size:8.5px;font-weight:600;color:var(--ink)}
+    .cw-file-copy small{font-size:7.5px;color:var(--muted)}
     .cw-msg{max-width:94%;padding:6px 8px;border-radius:9px;font-size:9.5px;line-height:1.45;opacity:0;animation:cwMsg 9s var(--ease) infinite}
-    .cw-msg.u{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:3px;animation-delay:.5s}
-    .cw-msg.a{align-self:flex-start;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:3px;animation-delay:2.1s}
+    .cw-msg.u{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:3px;animation-delay:var(--delay,.5s)}
+    .cw-msg.a{align-self:flex-start;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-bottom-left-radius:3px;animation-delay:var(--delay,2.1s)}
     @keyframes cwMsg{0%,4%{opacity:0;transform:translateY(8px)}10%,84%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(-5px)}}
     .cw-composer{display:flex;align-items:center;gap:6px;padding:7px 9px;border-top:1px solid var(--line)}
     .cw-ph{flex:1;color:var(--muted);font-size:9px}
     .cw-send{width:18px;height:18px;border-radius:5px;background:#ededea;display:grid;place-items:center;font-size:9px;color:var(--ink)}
     .cw-safe{display:inline-flex;align-items:center;background:#e4f3ef;color:#0f766e;border-radius:100px;padding:2px 7px;font-size:8px;font-weight:500}
     .cw-docname{font-size:10px;font-weight:500;color:var(--ink)}
-    .cw-body{display:flex;flex-direction:column;gap:7px;padding:10px}
-    .cw-body p{font-size:9px;line-height:1.6;color:#475569}
+    .cw-body{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden}
+    .cw-note{position:relative;width:min(90%,292px);aspect-ratio:1.3;padding:17px 18px 15px;background:#fffdf2;border:1px solid #ead889;border-radius:9px;box-shadow:0 15px 24px -18px rgba(2,6,23,.42);transform:rotate(-.8deg)}
+    .cw-note::after{content:"";position:absolute;top:-1px;right:-1px;width:24px;height:24px;background:linear-gradient(225deg,#fff 0 49%,#eadf9c 50% 100%);border-radius:0 8px 0 8px}
+    .cw-note-k{margin-bottom:10px;font-size:8.5px;font-weight:700;letter-spacing:.1em;color:#8a6d3b}
+    .cw-note p{font-size:9.5px;line-height:1.75;color:#59657a;white-space:nowrap}
     .cw-tag{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 4px;font-size:8px;font-weight:500;letter-spacing:.03em;animation:cwTag 9s var(--ease) infinite;animation-delay:calc(var(--d) * .42s + 2.6s)}
     @keyframes cwTag{0%,24%{background:var(--accent-soft);color:var(--accent)}30%,38%{background:#fde68a;color:#7c2d12}46%,100%{background:var(--accent-soft);color:var(--accent)}}
     .cw-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-top:1px solid var(--line);font-size:8px;color:var(--muted)}
@@ -437,17 +446,25 @@
         <section>
           <header><span class="cw-brand">Safe AI</span><span class="cw-online"><i></i>ONLINE</span></header>
           <div class="cw-log">
-            <div class="cw-msg u">Summarise the key terms</div>
-            <div class="cw-msg a">The purchaser acquires the Shares at the stated consideration, closing on the agreed date.</div>
+            <div class="cw-file"><span class="cw-file-ic"></span><span class="cw-file-copy"><b>Safe copy attached</b><small>5 sensitive fields protected</small></span></div>
+            <div class="cw-msg u" style="--delay:.5s">Summarise the key terms</div>
+            <div class="cw-msg a" style="--delay:1.7s">The purchaser acquires the Shares at the stated consideration, closing on the agreed date.</div>
+            <div class="cw-msg u" style="--delay:3.4s">Draft a client-ready memo</div>
+            <div class="cw-msg a" style="--delay:4.6s">Done — using only the protected copy.</div>
           </div>
           <div class="cw-composer"><span class="cw-ph">Ask about the redacted document…</span><span class="cw-send">↑</span></div>
         </section>
         <section>
           <header><span class="cw-docname">Stock purchase agreement</span><span class="cw-safe">Safe copy</span></header>
           <div class="cw-body">
-            <p>1.1 The ${tag('ORGANIZATION')} shall purchase the Shares from ${tag('PERSON')}.</p>
-            <p>1.2 Aggregate consideration is ${tag('MONEY')}, payable to the escrow.</p>
-            <p>1.3 Closing at ${tag('ADDRESS')} on ${tag('DATE')}.</p>
+            <div class="cw-note">
+              <div class="cw-note-k">SAFE COPY · PROTECTED</div>
+              <p>Buyer ${tag('ORGANIZATION')}</p>
+              <p>Seller ${tag('PERSON')}</p>
+              <p>Purchase price ${tag('MONEY')}</p>
+              <p>Closing ${tag('ADDRESS')}</p>
+              <p>Date ${tag('DATE')}</p>
+            </div>
           </div>
           <div class="cw-foot"><span>Protected copy ready</span><span>Only redacted text goes to AI</span></div>
         </section>
