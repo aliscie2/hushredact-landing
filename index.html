@@ -73,60 +73,45 @@
     .hero-media{margin-top:48px;border:1px solid var(--line2);border-radius:16px;overflow:hidden;background:var(--surface);aspect-ratio:16/10;display:grid;place-items:center}
     .hero-media img{width:100%;height:100%;object-fit:cover}
     .ph{color:var(--muted);font-size:13px;padding:24px;text-align:center}
-    /* minimal document editor — clear safe-copy redactions with a compact inspector */
-    .hero-demo{margin-top:48px;border:1px solid var(--line2);border-radius:16px;background:#f5f5f3;overflow:hidden;box-shadow:0 24px 60px -34px rgba(2,6,23,.4);text-align:left}
-    .he-appbar{min-height:52px;display:flex;align-items:center;gap:12px;padding:9px 12px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line2)}
-    .he-traffic{display:flex;gap:5px;flex:none}
-    .he-traffic i{width:8px;height:8px;border-radius:50%;background:#ff605c}
-    .he-traffic i:nth-child(2){background:#ffbd44}.he-traffic i:nth-child(3){background:#00ca4e}
-    .he-file{display:flex;flex-direction:column;min-width:0;line-height:1.25}
-    .he-file b{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .he-file small{font-size:8px;color:var(--muted)}
-    .he-device{margin-left:auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line2);border-radius:100px;padding:4px 8px;background:#fff;font-size:8.5px;font-weight:600;color:#475569}
-    .he-device i{width:6px;height:6px;border-radius:50%;background:#22c55e}
-    .he-view{display:flex;gap:2px;padding:3px;border-radius:8px;background:#f1f1ef}
-    .he-view span{padding:4px 8px;border-radius:6px;font-size:8.5px;font-weight:600;color:var(--muted)}
-    .he-view .active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(2,6,23,.12)}
-    .he-workspace{display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:430px}
-    .he-canvas{display:flex;align-items:center;justify-content:center;padding:28px;background:#f5f5f3;border-right:1px solid var(--line2)}
-    .he-page{position:relative;width:min(100%,650px);min-height:354px;padding:34px 44px 54px;background:#fff;border:1px solid #e7e7e4;border-radius:3px;box-shadow:0 12px 30px -20px rgba(2,6,23,.42);font-family:Georgia,"Times New Roman",serif;color:#334155}
-    .he-page-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px;font-family:var(--font);font-size:8px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
-    .he-safe-label{display:inline-flex;align-items:center;gap:5px;color:#0f766e}
-    .he-safe-label::before{content:"✓";display:grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#e4f3ef;font-size:8px}
-    .he-page-title{text-align:center;margin-bottom:22px;font-size:16px;font-weight:600;letter-spacing:.03em;color:#1e293b}
-    .he-page p{font-size:12.5px;line-height:2.35;margin:0 0 11px}
-    .he-redact{position:relative;display:inline-block;width:var(--w);height:1.02em;margin:0 2px;vertical-align:-.1em;border-radius:3px;background:var(--ink);box-shadow:inset 0 -1px rgba(255,255,255,.08)}
-    .he-redact.selected{box-shadow:0 0 0 3px #e0e7ff,inset 0 -1px rgba(255,255,255,.08)}
-    .he-redact.selected::after{content:attr(data-label);position:absolute;left:50%;top:-18px;transform:translateX(-50%);padding:2px 5px;border-radius:4px;background:var(--accent-soft);color:var(--accent);font-family:var(--font);font-size:7px;font-weight:700;letter-spacing:.05em;white-space:nowrap}
-    .he-page-foot{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;border-top:1px solid var(--line);font-family:var(--font);font-size:8.5px;color:var(--muted)}
-    .he-page-foot strong{color:#0f766e;font-weight:600}
-    .he-inspector{display:flex;flex-direction:column;padding:18px;background:#fff}
-    .he-inspector-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    .he-inspector-title{font-size:14px;font-weight:600;color:var(--ink)}
-    .he-inspector-sub{margin-top:3px;font-size:9px;line-height:1.45;color:var(--muted)}
-    .he-total{flex:none;border-radius:100px;padding:3px 8px;background:#e4f3ef;color:#0f766e;font-size:9px;font-weight:700}
-    .he-tabs{display:flex;gap:2px;margin:14px 0 10px;padding:3px;border-radius:8px;background:#f4f4f2}
-    .he-tabs span{flex:1;text-align:center;padding:5px;border-radius:6px;font-size:8.5px;font-weight:600;color:var(--muted)}
-    .he-tabs .active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(2,6,23,.1)}
-    .he-list{border:1px solid var(--line);border-radius:10px;overflow:hidden}
-    .he-entity{display:flex;align-items:center;gap:8px;padding:9px 10px;border-top:1px solid var(--line)}
-    .he-entity:first-child{border-top:0}
-    .he-entity.selected{background:#fafafa}
-    .he-type{flex:none;min-width:34px;text-align:center;border:1px solid var(--line2);border-radius:5px;padding:2px 4px;background:#fafafa;color:var(--muted);font-size:7px;font-weight:700;letter-spacing:.04em}
-    .he-entity-copy{min-width:0;display:flex;flex-direction:column;line-height:1.25}
-    .he-entity-copy b{font-size:9px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .he-entity-copy small{font-size:7.5px;color:var(--muted)}
-    .he-hidden{margin-left:auto;display:inline-flex;align-items:center;gap:4px;color:#0f766e;font-size:8px;font-weight:600}
-    .he-hidden::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--ink)}
-    .he-ready{margin-top:12px;padding:10px;border-radius:9px;background:#f0f9f6;border:1px solid #d8eee7}
-    .he-ready b{display:block;font-size:9.5px;color:#0f766e}
-    .he-ready span{display:block;margin-top:2px;font-size:8px;line-height:1.4;color:#47756b}
-    .he-approve{margin-top:auto;display:flex;align-items:center;justify-content:center;border-radius:9px;padding:9px;background:var(--ink);color:#fff;font-size:10px;font-weight:600}
-    @media(max-width:767px){
-      .he-appbar{flex-wrap:wrap}.he-device{margin-left:auto}.he-view{order:4;width:100%}.he-view span{flex:1;text-align:center}
-      .he-workspace{grid-template-columns:1fr}.he-canvas{padding:16px;border-right:0;border-bottom:1px solid var(--line2)}
-      .he-page{min-height:330px;padding:30px 20px 54px}.he-page p{font-size:11.5px}.he-inspector{gap:0}
-    }
+    /* animated hero demo — replica of the real product review screen (doc + redactions rail) */
+    .hero-demo{margin-top:48px;border:1px solid var(--line2);border-radius:16px;background:var(--white);overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;box-shadow:0 24px 60px -34px rgba(2,6,23,.4);text-align:left}
+    .hd-doc{position:relative;padding:26px 30px 46px;font-family:Georgia,"Times New Roman",serif;color:#1e293b;background:linear-gradient(#f6f6f4 1px,transparent 1px) 0 10px/100% 33px}
+    .hd-title{text-align:center;font-size:15px;letter-spacing:.02em;margin-bottom:14px}
+    .hd-doc p{font-size:12.5px;line-height:2.1;margin:0 0 10px}
+    .hd-sub{text-align:center;font-size:11.5px;margin-top:14px;letter-spacing:.02em}
+    /* pill snaps OVER the real value (same cell) so the sentence never shows a hole */
+    .hpw{display:inline-grid;align-items:center;justify-items:center;vertical-align:middle}
+    .hpr{grid-area:1/1;white-space:nowrap;padding:0 3px;border-radius:4px;animation:hprOut 7.5s var(--ease-organic) infinite;animation-delay:calc(var(--d) * .3s)}
+    .hp{grid-area:1/1;font-family:var(--font);font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:2.5px 8px;border-radius:6px;display:inline-block;opacity:0;animation:hpIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .3s)}
+    .hp-org{background:#d7ecea;color:#0f6a63}
+    .hp-money{background:#fbeab8;color:#8a5a08}
+    .hp-id{background:#e7defa;color:#6d33c9}
+    .hp-addr{background:#e6f1d4;color:#54780f}
+    @keyframes hpIn{0%,8%{opacity:0;transform:scale(.7)}12%{opacity:1;transform:scale(1.1)}15%,94%{opacity:1;transform:scale(1)}99%,100%{opacity:0;transform:scale(.7)}}
+    /* value hides only while the pill is fully opaque — a gap can never exist */
+    @keyframes hprOut{0%,4%{opacity:1;background:transparent;color:inherit}6%,10%{opacity:1;background:#fde68a;color:#7c2d12}16%,90%{opacity:0}96%,100%{opacity:1;background:transparent;color:inherit}}
+    .hd-chip{position:absolute;right:16px;bottom:14px;display:inline-flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:6px 12px;font-family:var(--font);font-size:11px;font-weight:600;color:var(--ink);box-shadow:0 6px 16px -10px rgba(2,6,23,.35);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:2.3s}
+    .hd-rail{background:#fbfbfa;border-left:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px}
+    .hd-railhead{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;font-family:var(--font-head)}
+    .hd-ic{width:14px;height:14px;flex:none}
+    .hd-count{margin-left:auto;background:#dcf2e6;color:#136c44;border-radius:100px;padding:2px 10px;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;animation:hdPulse 7.5s var(--ease-back) infinite}
+    @keyframes hdPulse{0%,30%{transform:scale(1)}34%{transform:scale(1.14)}38%,100%{transform:scale(1)}}
+    .hd-btns{display:flex;gap:8px}
+    .hd-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line2);background:#fff;border-radius:9px;padding:7px 6px;font-size:11.5px;font-weight:600;color:var(--ink)}
+    .hd-btn .hd-ic{width:12px;height:12px}
+    .hd-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .hd-cols{display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.06em;color:var(--muted);font-weight:600}
+    .hd-group{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
+    .hd-ghead{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;font-size:12.5px;font-weight:700}
+    .hd-gcount{background:#dcf2e6;color:#136c44;border-radius:100px;padding:1px 8px;font-size:10px;font-weight:600;animation:hdPulse 7.5s var(--ease-back) infinite;animation-delay:.2s}
+    .hr-row{display:flex;align-items:center;gap:8px;padding:7px 11px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .28s + .9s)}
+    @keyframes hdIn{0%,5%{opacity:0;transform:translateX(12px)}9%{opacity:1;transform:none}94%{opacity:1;transform:none}99%,100%{opacity:0}}
+    .hr-tag{font-size:8px;font-weight:700;border:1px solid var(--line2);border-radius:5px;padding:1px 5px;color:var(--muted);background:#fafaf9;letter-spacing:.03em}
+    .hr-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hr-eye{width:13px;height:13px;color:var(--muted);flex:none}
+    .hd-approve{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--ink);color:#fff;border-radius:10px;padding:9px;font-size:12.5px;font-weight:600}
+    @media(prefers-reduced-motion:reduce){.hp,.hr-row,.hd-chip{animation:none;opacity:1}.hpr{animation:none;opacity:0}.hd-count,.hd-gcount{animation:none}}
+    @media(max-width:767px){.hero-demo{grid-template-columns:1fr}.hd-rail{border-left:0;border-top:1px solid var(--line)}.hd-doc{padding:20px 18px 44px}}
     /* how it works */
     .hiw-head{display:flex;flex-direction:column;gap:12px}
     .caps{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px}
@@ -427,40 +412,32 @@
     function btn(label,href,cls,icon,right){ const t=`<span>${esc(label)}</span>`; return `<a class="btn ${cls}" href="${esc(href)}">${right?t+(icon||''):(icon||'')+t}</a>`; }
     function media(image,cls){ if(!image?.src)return ''; return `<img src="${esc(image.src)}" alt="${esc(image.alt||'')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false"/><span class="ph" hidden>${esc(image.alt||'Image')}</span>`; }
 
+    const IC_LOCK='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>';
+    const IC_EYE='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+    const IC_EYEOFF='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l18 18M10.6 10.7a2 2 0 002.7 2.7M9.4 5.6A9.6 9.6 0 0121.5 12a15 15 0 01-2.6 3.2M6 6a14.6 14.6 0 00-3.5 6s3.5 6.5 9.5 6.5a9.3 9.3 0 003.4-.6"/></svg>';
     function heroDemo(){
-      const redact=(label,width,selected=false)=>`<span class="he-redact${selected?' selected':''}" data-label="${label}" style="--w:${width}px"></span>`;
-      const entity=(type,value,label,selected=false)=>`<div class="he-entity${selected?' selected':''}"><span class="he-type">${type}</span><span class="he-entity-copy"><b>${value}</b><small>${label}</small></span><span class="he-hidden">Hidden</span></div>`;
+      let n=0; const P=(t,c,v)=>`<span class="hpw" style="--d:${n++}"><span class="hpr">${v}</span><span class="hp hp-${c}">${t}</span></span>`;
+      const row=(name,d)=>`<div class="hr-row" style="--d:${d}"><span class="hr-tag">ORG</span><span class="hr-name">${name}</span><svg class="hr-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></div>`;
       return `<div class="hero-demo" aria-hidden="true">
-        <div class="he-appbar">
-          <span class="he-traffic"><i></i><i></i><i></i></span>
-          <span class="he-file"><b>Stock purchase agreement</b><small>Saved locally</small></span>
-          <span class="he-device"><i></i>On-device</span>
-          <span class="he-view"><span>Original</span><span class="active">Safe copy</span></span>
+        <div class="hd-doc">
+          <div class="hd-title">STOCK PURCHASE AGREEMENT</div>
+          <p>1.1 The ${P('ORGANIZATION','org','Northwind Capital')} and the ${P('ORGANIZATION','org','Fabrikam Services')} shall purchase from each Seller the Shares set forth in Schedule A.</p>
+          <p>1.2 Aggregate ${P('MONEY','money','$8,000,000')} for the Shares shall be ${P('MONEY','money','$4,200,000')}, allocated among the ${P('ORGANIZATION','org','Contoso Group')} in proportion to the ${P('ID_NUMBER','id','No. 0042-1187')} sold by each.</p>
+          <p>1.3 Closing shall take place at the offices of counsel for the ${P('ORGANIZATION','org','Tailspin Partners')} in ${P('ADDRESS','addr','500 Market Street')} on the third Business Day following satisfaction of Article Five.</p>
+          <div class="hd-sub">ARTICLE TWO REPRESENTATIONS AND WARRANTIES</div>
+          <div class="hd-chip">${IC_LOCK}62 marked locally</div>
         </div>
-        <div class="he-workspace">
-          <div class="he-canvas">
-            <div class="he-page">
-              <div class="he-page-meta"><span class="he-safe-label">SAFE COPY</span><span>6 REDACTIONS</span></div>
-              <div class="he-page-title">STOCK PURCHASE AGREEMENT</div>
-              <p>1.1 The ${redact('ORGANIZATION',108,true)} shall purchase the Shares from ${redact('PERSON',88)}.</p>
-              <p>1.2 Aggregate consideration is ${redact('MONEY',86)}, payable to escrow account ${redact('ID NUMBER',102)}.</p>
-              <p>1.3 Closing shall take place at ${redact('ADDRESS',118)} on ${redact('DATE',76)}.</p>
-              <div class="he-page-foot"><strong>✓ Protected copy ready</strong><span>Original stays on your device</span></div>
-            </div>
+        <aside class="hd-rail">
+          <div class="hd-railhead">${IC_LOCK}Redactions<span class="hd-count">62/62</span></div>
+          <div class="hd-btns"><span class="hd-btn">${IC_EYEOFF}Redact All</span><span class="hd-btn">${IC_EYE}Reveal All</span></div>
+          <div class="hd-cols"><span>INFORMATION TYPE</span><span>VISIBILITY</span></div>
+          <div class="hd-group">
+            <div class="hd-ghead">Organizations<span class="hd-gcount">10/12</span></div>
+            ${row('Fabrikam Services',0)}${row('Northwind Holdings',1)}${row('Contoso Group',2)}${row('Adventure Works',3)}${row('Tailspin Partners',4)}
           </div>
-          <aside class="he-inspector">
-            <div class="he-inspector-head"><div><div class="he-inspector-title">Redactions</div><div class="he-inspector-sub">Choose what stays hidden in the safe copy.</div></div><span class="he-total">6</span></div>
-            <div class="he-tabs"><span class="active">Hidden 6</span><span>Visible 0</span></div>
-            <div class="he-list">
-              ${entity('ORG','Northwind Capital','Organization',true)}
-              ${entity('PERSON','Dana Okonkwo','Person')}
-              ${entity('MONEY','$4,200,000','Money')}
-              ${entity('ADDRESS','500 Market Street','Address')}
-            </div>
-            <div class="he-ready"><b>Safe copy ready</b><span>Only the protected version can be shared with AI.</span></div>
-            <span class="he-approve">Approve safe copy</span>
-          </aside>
-        </div>
+          <div class="hd-btns"><span class="hd-btn hd-dark">${IC_EYEOFF}Redacted</span><span class="hd-btn">Synthetic</span></div>
+          <span class="hd-approve">Approve</span>
+        </aside>
       </div>`;
     }
     function ctaScene(d){
