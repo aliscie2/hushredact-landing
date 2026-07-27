@@ -73,13 +73,23 @@
     .hero-media{margin-top:48px;border:1px solid var(--line2);border-radius:16px;overflow:hidden;background:var(--surface);aspect-ratio:16/10;display:grid;place-items:center}
     .hero-media img{width:100%;height:100%;object-fit:cover}
     .ph{color:var(--muted);font-size:13px;padding:24px;text-align:center}
-    /* animated hero demo — replica of the real product review screen (doc + redactions rail) */
-    .hero-demo{margin-top:48px;border:1px solid var(--line2);border-radius:16px;background:var(--white);overflow:hidden;display:grid;grid-template-columns:1.5fr 1fr;box-shadow:0 24px 60px -34px rgba(2,6,23,.4);text-align:left}
-    .hd-doc{position:relative;padding:26px 30px 46px;font-family:Georgia,"Times New Roman",serif;color:#1e293b;background:linear-gradient(#f6f6f4 1px,transparent 1px) 0 10px/100% 33px}
-    .hd-title{text-align:center;font-size:15px;letter-spacing:.02em;margin-bottom:14px}
-    .hd-doc p{font-size:12.5px;line-height:2.1;margin:0 0 10px}
-    .hd-sub{text-align:center;font-size:11.5px;margin-top:14px;letter-spacing:.02em}
-    /* pill snaps OVER the real value (same cell) so the sentence never shows a hole */
+    /* minimal editor shell around the original labeled redaction animation */
+    .hero-demo{margin-top:48px;border:1px solid var(--line2);border-radius:16px;background:#f5f5f3;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 310px;box-shadow:0 24px 60px -34px rgba(2,6,23,.4);text-align:left}
+    .hd-toolbar{grid-column:1/-1;min-height:52px;display:flex;align-items:center;gap:11px;padding:9px 13px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line2)}
+    .hd-traffic{display:flex;gap:5px;flex:none}
+    .hd-traffic i{width:8px;height:8px;border-radius:50%;background:#ff605c}
+    .hd-traffic i:nth-child(2){background:#ffbd44}.hd-traffic i:nth-child(3){background:#00ca4e}
+    .hd-filemeta{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+    .hd-filemeta b{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .hd-filemeta small{font-size:8px;color:var(--muted)}
+    .hd-local{margin-left:auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line2);border-radius:100px;padding:4px 9px;background:#fff;font-size:8.5px;font-weight:600;color:#475569}
+    .hd-local i{width:6px;height:6px;border-radius:50%;background:#22c55e}
+    .hd-doc{display:flex;align-items:center;justify-content:center;padding:28px;background:#f5f5f3;border-right:1px solid var(--line2)}
+    .hd-paper{position:relative;width:100%;min-height:344px;padding:34px 38px 54px;background:#fff;border:1px solid #e7e7e4;border-radius:3px;box-shadow:0 12px 30px -20px rgba(2,6,23,.42);font-family:Georgia,"Times New Roman",serif;color:#1e293b}
+    .hd-title{text-align:center;font-size:15px;letter-spacing:.02em;margin-bottom:22px}
+    .hd-paper p{font-size:12.5px;line-height:2.25;margin:0 0 11px}
+    .hd-sub{text-align:center;font-size:11px;margin-top:20px;letter-spacing:.02em}
+    /* Behavior contract: preserve value → highlight → labeled pill. */
     .hpw{display:inline-grid;align-items:center;justify-items:center;vertical-align:middle}
     .hpr{grid-area:1/1;white-space:nowrap;padding:0 3px;border-radius:4px;animation:hprOut 7.5s var(--ease-organic) infinite;animation-delay:calc(var(--d) * .3s)}
     .hp{grid-area:1/1;font-family:var(--font);font-size:9.5px;font-weight:700;letter-spacing:.04em;padding:2.5px 8px;border-radius:6px;display:inline-block;opacity:0;animation:hpIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .3s)}
@@ -88,30 +98,28 @@
     .hp-id{background:#e7defa;color:#6d33c9}
     .hp-addr{background:#e6f1d4;color:#54780f}
     @keyframes hpIn{0%,8%{opacity:0;transform:scale(.7)}12%{opacity:1;transform:scale(1.1)}15%,94%{opacity:1;transform:scale(1)}99%,100%{opacity:0;transform:scale(.7)}}
-    /* value hides only while the pill is fully opaque — a gap can never exist */
     @keyframes hprOut{0%,4%{opacity:1;background:transparent;color:inherit}6%,10%{opacity:1;background:#fde68a;color:#7c2d12}16%,90%{opacity:0}96%,100%{opacity:1;background:transparent;color:inherit}}
-    .hd-chip{position:absolute;right:16px;bottom:14px;display:inline-flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:6px 12px;font-family:var(--font);font-size:11px;font-weight:600;color:var(--ink);box-shadow:0 6px 16px -10px rgba(2,6,23,.35);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:2.3s}
-    .hd-rail{background:#fbfbfa;border-left:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:10px}
-    .hd-railhead{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;font-family:var(--font-head)}
-    .hd-ic{width:14px;height:14px;flex:none}
-    .hd-count{margin-left:auto;background:#dcf2e6;color:#136c44;border-radius:100px;padding:2px 10px;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;animation:hdPulse 7.5s var(--ease-back) infinite}
+    .hd-chip{position:absolute;right:14px;bottom:13px;display:inline-flex;gap:6px;align-items:center;background:#f0f9f6;border:1px solid #d8eee7;border-radius:100px;padding:5px 10px;font-family:var(--font);font-size:9px;font-weight:600;color:#0f766e;opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:2.3s}
+    .hd-rail{background:#fff;padding:20px;display:flex;flex-direction:column;gap:12px}
+    .hd-railhead{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;font-family:var(--font-head)}
+    .hd-count{margin-left:auto;background:#e4f3ef;color:#0f766e;border-radius:100px;padding:3px 8px;font-size:9px;font-weight:700;font-variant-numeric:tabular-nums;animation:hdPulse 7.5s var(--ease-back) infinite}
     @keyframes hdPulse{0%,30%{transform:scale(1)}34%{transform:scale(1.14)}38%,100%{transform:scale(1)}}
-    .hd-btns{display:flex;gap:8px}
-    .hd-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line2);background:#fff;border-radius:9px;padding:7px 6px;font-size:11.5px;font-weight:600;color:var(--ink)}
-    .hd-btn .hd-ic{width:12px;height:12px}
-    .hd-dark{background:var(--ink);color:#fff;border-color:var(--ink)}
-    .hd-cols{display:flex;justify-content:space-between;font-size:8.5px;letter-spacing:.06em;color:var(--muted);font-weight:600}
+    .hd-copy{font-size:9px;line-height:1.45;color:var(--muted)}
     .hd-group{border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
-    .hd-ghead{display:flex;align-items:center;justify-content:space-between;padding:9px 11px;font-size:12.5px;font-weight:700}
-    .hd-gcount{background:#dcf2e6;color:#136c44;border-radius:100px;padding:1px 8px;font-size:10px;font-weight:600;animation:hdPulse 7.5s var(--ease-back) infinite;animation-delay:.2s}
-    .hr-row{display:flex;align-items:center;gap:8px;padding:7px 11px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .28s + .9s)}
+    .hd-ghead{display:flex;align-items:center;justify-content:space-between;padding:10px 11px;font-size:10px;font-weight:700}
+    .hd-gcount{color:var(--muted);font-size:8px;font-weight:600;animation:hdPulse 7.5s var(--ease-back) infinite;animation-delay:.2s}
+    .hr-row{display:flex;align-items:center;gap:7px;padding:9px 10px;border-top:1px solid var(--line);font-size:9px;color:var(--ink);opacity:0;animation:hdIn 7.5s var(--ease-back) infinite;animation-delay:calc(var(--d) * .28s + .9s)}
     @keyframes hdIn{0%,5%{opacity:0;transform:translateX(12px)}9%{opacity:1;transform:none}94%{opacity:1;transform:none}99%,100%{opacity:0}}
-    .hr-tag{font-size:8px;font-weight:700;border:1px solid var(--line2);border-radius:5px;padding:1px 5px;color:var(--muted);background:#fafaf9;letter-spacing:.03em}
+    .hr-tag{min-width:36px;text-align:center;font-size:7px;font-weight:700;border-radius:5px;padding:2px 5px;letter-spacing:.03em}
+    .hr-org{background:#d7ecea;color:#0f6a63}.hr-money{background:#fbeab8;color:#8a5a08}.hr-id{background:#e7defa;color:#6d33c9}.hr-address{background:#e6f1d4;color:#54780f}
     .hr-name{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hr-eye{width:13px;height:13px;color:var(--muted);flex:none}
-    .hd-approve{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--ink);color:#fff;border-radius:10px;padding:9px;font-size:12.5px;font-weight:600}
+    .hr-state{color:#0f766e;font-size:7.5px;font-weight:600}
+    .hd-safe{padding:10px;border-radius:9px;background:#f0f9f6;border:1px solid #d8eee7}
+    .hd-safe b{display:block;font-size:9.5px;color:#0f766e}
+    .hd-safe span{display:block;margin-top:2px;font-size:8px;line-height:1.4;color:#47756b}
+    .hd-approve{margin-top:auto;display:flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;border-radius:9px;padding:9px;font-size:10px;font-weight:600}
     @media(prefers-reduced-motion:reduce){.hp,.hr-row,.hd-chip{animation:none;opacity:1}.hpr{animation:none;opacity:0}.hd-count,.hd-gcount{animation:none}}
-    @media(max-width:767px){.hero-demo{grid-template-columns:1fr}.hd-rail{border-left:0;border-top:1px solid var(--line)}.hd-doc{padding:20px 18px 44px}}
+    @media(max-width:767px){.hero-demo{grid-template-columns:1fr}.hd-toolbar{grid-column:1}.hd-doc{padding:16px;border-right:0;border-bottom:1px solid var(--line2)}.hd-paper{min-height:330px;padding:28px 20px 52px}.hd-paper p{font-size:11.5px}.hd-rail{border-top:1px solid var(--line2)}}
     /* how it works */
     .hiw-head{display:flex;flex-direction:column;gap:12px}
     .caps{display:grid;grid-template-columns:1fr;gap:20px;margin-top:40px}
@@ -412,31 +420,37 @@
     function btn(label,href,cls,icon,right){ const t=`<span>${esc(label)}</span>`; return `<a class="btn ${cls}" href="${esc(href)}">${right?t+(icon||''):(icon||'')+t}</a>`; }
     function media(image,cls){ if(!image?.src)return ''; return `<img src="${esc(image.src)}" alt="${esc(image.alt||'')}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false"/><span class="ph" hidden>${esc(image.alt||'Image')}</span>`; }
 
-    const IC_LOCK='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>';
-    const IC_EYE='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
-    const IC_EYEOFF='<svg class="hd-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l18 18M10.6 10.7a2 2 0 002.7 2.7M9.4 5.6A9.6 9.6 0 0121.5 12a15 15 0 01-2.6 3.2M6 6a14.6 14.6 0 00-3.5 6s3.5 6.5 9.5 6.5a9.3 9.3 0 003.4-.6"/></svg>';
     function heroDemo(){
       let n=0; const P=(t,c,v)=>`<span class="hpw" style="--d:${n++}"><span class="hpr">${v}</span><span class="hp hp-${c}">${t}</span></span>`;
-      const row=(name,d)=>`<div class="hr-row" style="--d:${d}"><span class="hr-tag">ORG</span><span class="hr-name">${name}</span><svg class="hr-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></div>`;
+      const row=(type,cls,name,d)=>`<div class="hr-row" style="--d:${d}"><span class="hr-tag hr-${cls}">${type}</span><span class="hr-name">${name}</span><span class="hr-state">Redacted</span></div>`;
       return `<div class="hero-demo" aria-hidden="true">
+        <div class="hd-toolbar">
+          <span class="hd-traffic"><i></i><i></i><i></i></span>
+          <span class="hd-filemeta"><b>Stock purchase agreement</b><small>Saved locally · Review mode</small></span>
+          <span class="hd-local"><i></i>On-device</span>
+        </div>
         <div class="hd-doc">
-          <div class="hd-title">STOCK PURCHASE AGREEMENT</div>
-          <p>1.1 The ${P('ORGANIZATION','org','Northwind Capital')} and the ${P('ORGANIZATION','org','Fabrikam Services')} shall purchase from each Seller the Shares set forth in Schedule A.</p>
-          <p>1.2 Aggregate ${P('MONEY','money','$8,000,000')} for the Shares shall be ${P('MONEY','money','$4,200,000')}, allocated among the ${P('ORGANIZATION','org','Contoso Group')} in proportion to the ${P('ID_NUMBER','id','No. 0042-1187')} sold by each.</p>
-          <p>1.3 Closing shall take place at the offices of counsel for the ${P('ORGANIZATION','org','Tailspin Partners')} in ${P('ADDRESS','addr','500 Market Street')} on the third Business Day following satisfaction of Article Five.</p>
-          <div class="hd-sub">ARTICLE TWO REPRESENTATIONS AND WARRANTIES</div>
-          <div class="hd-chip">${IC_LOCK}62 marked locally</div>
+          <div class="hd-paper">
+            <div class="hd-title">STOCK PURCHASE AGREEMENT</div>
+            <p>1.1 The ${P('ORGANIZATION','org','Northwind Capital')} and the ${P('ORGANIZATION','org','Fabrikam Services')} shall purchase from each Seller the Shares set forth in Schedule A.</p>
+            <p>1.2 Aggregate ${P('MONEY','money','$8,000,000')} for the Shares shall be ${P('MONEY','money','$4,200,000')}, allocated among the ${P('ORGANIZATION','org','Contoso Group')} in proportion to the ${P('ID NUMBER','id','No. 0042-1187')} sold by each.</p>
+            <p>1.3 Closing shall take place at the offices of counsel for the ${P('ORGANIZATION','org','Tailspin Partners')} in ${P('ADDRESS','addr','500 Market Street')}.</p>
+            <div class="hd-sub">ARTICLE TWO · REPRESENTATIONS AND WARRANTIES</div>
+            <div class="hd-chip">✓ 8 marked locally</div>
+          </div>
         </div>
         <aside class="hd-rail">
-          <div class="hd-railhead">${IC_LOCK}Redactions<span class="hd-count">62/62</span></div>
-          <div class="hd-btns"><span class="hd-btn">${IC_EYEOFF}Redact All</span><span class="hd-btn">${IC_EYE}Reveal All</span></div>
-          <div class="hd-cols"><span>INFORMATION TYPE</span><span>VISIBILITY</span></div>
+          <div class="hd-railhead">Redactions<span class="hd-count">8 detected</span></div>
+          <p class="hd-copy">Review the labeled information before creating a safe copy.</p>
           <div class="hd-group">
-            <div class="hd-ghead">Organizations<span class="hd-gcount">10/12</span></div>
-            ${row('Fabrikam Services',0)}${row('Northwind Holdings',1)}${row('Contoso Group',2)}${row('Adventure Works',3)}${row('Tailspin Partners',4)}
+            <div class="hd-ghead">Detected information<span class="hd-gcount">4 of 8 shown</span></div>
+            ${row('ORG','org','Northwind Capital',0)}
+            ${row('MONEY','money','$4,200,000',1)}
+            ${row('ID','id','No. 0042-1187',2)}
+            ${row('ADDRESS','address','500 Market Street',3)}
           </div>
-          <div class="hd-btns"><span class="hd-btn hd-dark">${IC_EYEOFF}Redacted</span><span class="hd-btn">Synthetic</span></div>
-          <span class="hd-approve">Approve</span>
+          <div class="hd-safe"><b>Ready for review</b><span>The original stays on this device. Only the safe copy can be shared.</span></div>
+          <span class="hd-approve">Approve redactions</span>
         </aside>
       </div>`;
     }
