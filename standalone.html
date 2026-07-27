@@ -180,11 +180,23 @@
     .fw-dots i:nth-child(1){background:#f0b9b0}.fw-dots i:nth-child(2){background:#f3ddae}.fw-dots i:nth-child(3){background:#bfe0d9}
     .fw-name{flex:1;font-size:9px;color:#54534e}
     .fw-pill{display:inline-flex;align-items:center;gap:3px;background:#f1efe9;color:#8a6d3b;border-radius:100px;padding:2px 8px;font-size:8px;font-weight:500}
-    .fw-doc{flex:1;padding:12px;display:flex;flex-direction:column;gap:7px}
+    .fw-doc{flex:1;min-height:0;padding:12px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
     .fw-h{font-size:9px;font-weight:500;letter-spacing:.05em;color:var(--ink)}
     .fw-doc p{font-size:8.7px;line-height:1.8;color:#475569}
     .fw-tok{border-radius:3px;padding:0 3px;animation:fwRedact 9s var(--ease) infinite;animation-delay:calc(var(--d) * .5s)}
     @keyframes fwRedact{0%,6%{background:transparent;color:inherit}9%,13%{background:#f3ddae;color:#7c2d12}17%,88%{background:var(--ink);color:var(--ink)}95%,100%{background:transparent;color:inherit}}
+    .fw-note-stage{position:relative;flex:1;min-height:300px;isolation:isolate}
+    .fw-note{position:absolute;width:min(84%,280px);aspect-ratio:1.36;padding:18px 20px 16px;background:#fffdf2;border:1px solid #ead889;border-radius:9px;box-shadow:0 15px 25px -18px rgba(2,6,23,.42);color:#59657a}
+    .fw-note::after{content:"";position:absolute;top:-1px;right:-1px;width:28px;height:28px;background:linear-gradient(225deg,#fff 0 49%,#eadf9c 50% 100%);border-radius:0 8px 0 9px}
+    .fw-note-original{top:6%;left:6%;transform:rotate(-1.8deg);z-index:1}
+    .fw-note-safe{right:6%;bottom:6%;transform:rotate(1.6deg);z-index:2}
+    .fw-note-k{margin-bottom:10px;font-size:9px;font-weight:700;letter-spacing:.1em;color:#8a6d3b}
+    .fw-note p{font-size:10px;line-height:1.75;color:#59657a;white-space:nowrap}
+    .fw-sensitive{background:#fde68a;color:#92400e;border-radius:3px;padding:1px 4px}
+    .fw-redaction{display:inline-block;height:.72em;background:var(--ink);border-radius:2px;vertical-align:baseline}
+    .fw-redaction-sm{width:72px}.fw-redaction-md{width:94px}.fw-redaction-lg{width:116px}
+    .fw-note-arrow{position:absolute;top:50%;left:50%;z-index:3;display:inline-flex;align-items:center;gap:5px;transform:translate(-50%,-50%);padding:5px 9px;border:1px solid var(--line2);border-radius:100px;background:#fff;box-shadow:0 6px 14px -10px rgba(2,6,23,.4);font-size:8px;font-weight:600;color:var(--ink);white-space:nowrap}
+    .fw-note-arrow svg{width:11px;height:11px}
     .fw-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-top:1px solid var(--line);background:#fafaf8;font-size:8px;color:var(--muted);letter-spacing:.05em}
     .fw-count{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:0}
     @media(prefers-reduced-motion:reduce){.fw-tok{animation:none;background:var(--ink);color:var(--ink)}}
@@ -435,14 +447,26 @@
       </div>`;
     }
     function featScene(){
-      let n=0; const tok=t=>`<span class="fw-tok" style="--d:${n++}">${esc(t)}</span>`;
       return `<div class="fx" aria-hidden="true"><div class="fw">
         <div class="fw-bar"><span class="fw-dots"><i></i><i></i><i></i></span><span class="fw-name">Stock_Purchase_Agreement.pdf</span><span class="fw-pill">Offline</span></div>
         <div class="fw-doc">
-          <div class="fw-h">STOCK PURCHASE AGREEMENT</div>
-          <p>1.1 The ${tok('Northwind Capital')} shall purchase from ${tok('Dana Okonkwo')} the Shares set forth in Schedule A on ${tok('March 14, 2026')}.</p>
-          <p>1.2 Aggregate consideration shall be ${tok('$4,200,000')}, payable to the escrow account under Tax ID ${tok('84-2910337')}.</p>
-          <p>1.3 Closing shall take place at ${tok('500 Market Street')}, certified by ${tok('Priya Anand')}.</p>
+          <div class="fw-note-stage">
+            <div class="fw-note fw-note-original">
+              <div class="fw-note-k">ORIGINAL · ON YOUR DEVICE</div>
+              <p>Buyer <span class="fw-sensitive">Northwind Capital</span></p>
+              <p>Seller <span class="fw-sensitive">Dana Okonkwo</span></p>
+              <p>Price <span class="fw-sensitive">$4,200,000</span></p>
+              <p>Closing <span class="fw-sensitive">March 14, 2026</span></p>
+            </div>
+            <span class="fw-note-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M7 14l5 5 5-5"/></svg>Redact locally</span>
+            <div class="fw-note fw-note-safe">
+              <div class="fw-note-k">SAFE COPY · READY FOR AI</div>
+              <p>Buyer <span class="fw-redaction fw-redaction-lg"></span></p>
+              <p>Seller <span class="fw-redaction fw-redaction-md"></span></p>
+              <p>Price <span class="fw-redaction fw-redaction-sm"></span></p>
+              <p>Closing <span class="fw-redaction fw-redaction-md"></span></p>
+            </div>
+          </div>
         </div>
         <div class="fw-foot"><span>OFFLINE · REDACTION</span><span class="fw-count">7 redacted on this device</span></div>
       </div></div>`;
